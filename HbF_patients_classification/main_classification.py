@@ -280,14 +280,14 @@ def main():
 	for i in range(100):
 		sample_index = X.sample(n=X.shape[0]).index.tolist()
 		ddf,a,c = simple_CV_evaluation(model,params,X.loc[sample_index],Y.loc[sample_index])
-		ddf.to_csv("%s_prediction.csv"%("ALL"),index=False)
-		plot_top_features(dp(model),X,Y,"ALL")
+		# ddf.to_csv("%s_prediction.csv"%("ALL"),index=False)
+		# plot_top_features(dp(model),X,Y,"ALL")
 		ddf['label']="All_variants"
 		auROC_list_a+=a
 		auPRC_list_a+=c
 		ddf2,b,d = simple_CV_evaluation(model,params,X1.loc[sample_index],Y.loc[sample_index])
-		ddf2.to_csv("%s_prediction.csv"%("GWAS"),index=False)
-		plot_top_features(dp(model),X,Y,"GWAS")
+		# ddf2.to_csv("%s_prediction.csv"%("GWAS"),index=False)
+		# plot_top_features(dp(model),X1,Y,"GWAS")
 		ddf2['label']="GWAS_only"
 		df_list.append(ddf)
 		df_list.append(ddf2)
