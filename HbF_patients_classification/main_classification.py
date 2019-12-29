@@ -14,7 +14,7 @@ import argparse
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
-import xgboost as xgb
+# import xgboost as xgb
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -38,7 +38,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB 
 from sklearn.ensemble import RandomForestClassifier
 # from mlxtend.classifier import StackingCVClassifier
-import umap
+# import umap
 import warnings
 from sklearn.metrics import roc_curve,roc_auc_score,average_precision_score,precision_recall_curve
 from sklearn.datasets import load_iris
@@ -277,7 +277,7 @@ def main():
 	auPRC_list_b=[]
 	df_list = []
 	
-	for i in range(3):
+	for i in range(100):
 		sample_index = X.sample(n=X.shape[0]).index.tolist()
 		ddf,a,c = simple_CV_evaluation(model,params,X.loc[sample_index],Y.loc[sample_index])
 		ddf.to_csv("%s_prediction.csv"%("ALL"),index=False)
