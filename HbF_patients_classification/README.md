@@ -1,20 +1,27 @@
 
 # Get started
 
-Empirical Brown’s method (EBM) is a non-parametric method to combine dependent p-values. 
+Input: `snp_data.tsv`
+Output: `*.pdf`
+Code: `main_classification.py`
 
 ## Usage
 
-`python get_functional_score.py`
+`python main_classification.py`
 
-## Input
+## Machine learning setup
 
-`ABE_RRA_results.normalized.txt` is the gRNA count table, EBM uses to calculate covariance matrix.
+SCD patients classification using genetic variants.
 
-`ABE_high_vs_low_mageck_RRA_results.sgrna_summary.txt` contains the FDRs from MaGeCK RRA test.
+Feature set 1: common genetic variants from GWAS study.
 
-`gRNA_all_A.bed` contains every A's coverage on each gRNA. This file is used to get all gRNAs that is overlaped with a particular A.
+Feature set 2: feature set 1 + common genetic variants around (+- 20bp) top HbF scores.
 
-## Algorithm
+Positive class: HbF patients with HbF > mean + 1*std
 
-The steps are straightforward. For each unique A, get its overlaped gRNAs (i.e., positions, FDRs, counts), which are the input to EBM. EBM outputs combined p-value and we take -np.log10.
+Negative class: HbF patients with mean + 1*std >= HbF >= mean - 1*std
+
+
+
+
+
