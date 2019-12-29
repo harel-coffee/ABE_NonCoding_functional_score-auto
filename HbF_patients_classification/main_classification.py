@@ -131,7 +131,7 @@ def plot_top_features(reg,X,y,output):
 
 def simple_CV_evaluation(model,params,X,y):
 
-	outer = StratifiedKFold(n_splits=3,shuffle=True)
+	outer = StratifiedKFold(n_splits=3,shuffle=False)
 	my_pred=[]
 	my_true=[]
 
@@ -142,9 +142,9 @@ def simple_CV_evaluation(model,params,X,y):
 	for train_index, test_index in outer.split(X,y):
 		X_train, X_test = X.iloc[train_index], X.iloc[test_index]
 		y_train, y_test = y.iloc[train_index], y.iloc[test_index]
-		
-		model.fit(X_train[best_features].values,y_train)
-		pred_y = model.predict_proba(X_test[best_features].values)
+		current_model = dp(model)
+		current_model.fit(X_train[best_features].values,y_train)
+		pred_y = current_model.predict_proba(X_test[best_features].values)
 		pred_y = [x[1] for x in pred_y]
 		y_test = y_test.tolist()
 		auROC = roc_auc_score(y_test,pred_y)
@@ -277,14 +277,15 @@ def main():
 	auPRC_list_b=[]
 	df_list = []
 	
-	for i in range(100):
-		ddf,a,c = simple_CV_evaluation(model,params,X,Y)
+	for i in range(3):
+		sample_index = X.sample(n=X.shape[0]).index.tolist()
+		ddf,a,c = simple_CV_evaluation(model,params,X.loc[sample_index],Y.loc[sample_index])
 		ddf.to_csv("%s_prediction.csv"%("ALL"),index=False)
 		plot_top_features(dp(model),X,Y,"ALL")
 		ddf['label']="All_variants"
 		auROC_list_a+=a
 		auPRC_list_a+=c
-		ddf2,b,d = simple_CV_evaluation(model,params,X1,Y)
+		ddf2,b,d = simple_CV_evaluation(model,params,X1.loc[sample_index],Y.loc[sample_index])
 		ddf2.to_csv("%s_prediction.csv"%("GWAS"),index=False)
 		plot_top_features(dp(model),X,Y,"GWAS")
 		ddf2['label']="GWAS_only"
