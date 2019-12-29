@@ -7,16 +7,15 @@ gRNA.all.bed contains 6194 gRNA locations.
 
 1. Get number of editable A.
 
-Based on our amplicon sequencing result, positions from 1 to 11 (0-index) can be edited with at least 1% editing frequency
+Based on our amplicon sequencing result, positions from 0 to 12 (0-index) can be edited with at least 1% editing frequency
 
 ```
-python main.py 1 11
-Editing Window starts at:1, length is: 11
+Editing Window starts at:0, length is: 13
 The following output should be an empty dataframe
 Empty DataFrame
 Columns: [0, 1, flag]
 Index: []
-('editable_A:', 9112, 'editable_C:', 10103, 'Total:', 19215)
+editable_A: 10156 editable_C: 11327 Total: 21483
 ```
 
 The parameters are start position and length. Namely, which region in the gRNA is used to define editable A.
