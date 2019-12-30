@@ -13,5 +13,8 @@ Also, go to each folder to see a detailed README to run the code in that part.
 
 
 
+# Reference
+
+All NGS analyses are following instructions from HemTools: https://hemtools.readthedocs.io/en/latest/
 
 

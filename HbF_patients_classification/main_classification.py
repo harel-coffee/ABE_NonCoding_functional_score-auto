@@ -142,6 +142,7 @@ def simple_CV_evaluation(model,params,X,y):
 	for train_index, test_index in outer.split(X,y):
 		X_train, X_test = X.iloc[train_index], X.iloc[test_index]
 		y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+		# print (list(set(X_train.index.tolist()).intersection(X_test.index.tolist())))
 		current_model = dp(model)
 		current_model.fit(X_train[best_features].values,y_train)
 		pred_y = current_model.predict_proba(X_test[best_features].values)
@@ -190,7 +191,7 @@ def plot_auPRC_multi(df,color_dict):
 
 	for s,d in df.groupby('label'):
 		plot_df = pd.DataFrame()
-		x_predict,y_predict,_ = precision_recall_curve(d['true'],d['pred'])
+		y_predict,x_predict,_ = precision_recall_curve(d['true'],d['pred'])
 		auc = average_precision_score(d['true'],d['pred'])
 		print (auc)
 		plot_df['x'] = x_predict
@@ -278,16 +279,16 @@ def main():
 	df_list = []
 	
 	for i in range(100):
-		sample_index = X.sample(n=X.shape[0]).index.tolist()
+		sample_index = X.sample(frac=1).index.tolist()
 		ddf,a,c = simple_CV_evaluation(model,params,X.loc[sample_index],Y.loc[sample_index])
-		# ddf.to_csv("%s_prediction.csv"%("ALL"),index=False)
-		# plot_top_features(dp(model),X,Y,"ALL")
+		ddf.to_csv("%s_prediction.csv"%("ALL"),index=False)
+		plot_top_features(dp(model),X,Y,"ALL")
 		ddf['label']="All_variants"
 		auROC_list_a+=a
 		auPRC_list_a+=c
 		ddf2,b,d = simple_CV_evaluation(model,params,X1.loc[sample_index],Y.loc[sample_index])
-		# ddf2.to_csv("%s_prediction.csv"%("GWAS"),index=False)
-		# plot_top_features(dp(model),X1,Y,"GWAS")
+		ddf2.to_csv("%s_prediction.csv"%("GWAS"),index=False)
+		plot_top_features(dp(model),X1,Y,"GWAS")
 		ddf2['label']="GWAS_only"
 		df_list.append(ddf)
 		df_list.append(ddf2)
