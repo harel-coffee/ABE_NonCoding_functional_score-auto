@@ -149,40 +149,14 @@ def gkm_SVM_fit_transform(pos_train,neg_train,pos_test,neg_test,d=3):
 	"""From HemTools"""
 	
 	addon_string = str(uuid.uuid4()).split("-")[-1]
-	kernel_out = addon_string + ".kernel.out"
 	train_out = addon_string
 	classify_out = addon_string + ".classify.out"
-	# kernel_command = "gkmsvm_kernel -d %s %s %s %s >/dev/null 2>&1"%(d,pos_train,neg_train,kernel_out)
 	train_command = "gkmtrain -w 10 %s %s %s >/dev/null 2>&1"%(pos_train,neg_train, train_out)
 	
 	classify_input = addon_string + ".classify_input.fa"
 	combine_pos_neg_command = "cat %s %s > %s"%(pos_test,neg_test,classify_input)
 	classify_command = "gkmpredict %s %s.model.txt %s >/dev/null 2>&1"%(classify_input,train_out,classify_out)
 	## run
-	# os.system(kernel_command)
-	os.system(train_command)
-	os.system(combine_pos_neg_command)
-	os.system(classify_command)
-	
-	y_pred = pd.read_csv(classify_out,sep="\t",header=None,index_col=0)
-	y_pred.columns = ['pred']
-	os.system("rm %s*"%(addon_string))  
-	return y_pred
-	
-def gkm_SVM_fit_transform2(pos_train,neg_train,pos_test,neg_test,d=3):
-	"""From HemTools"""
-	addon_string = str(uuid.uuid4()).split("-")[-1]
-	kernel_out = addon_string + ".kernel.out"
-	train_out = addon_string + ".train"
-	classify_out = addon_string + ".classify.out"
-	kernel_command = "gkmsvm_kernel -d %s %s %s %s >/dev/null 2>&1"%(d,pos_train,neg_train,kernel_out)
-	train_command = "gkmsvm_train %s %s %s %s >/dev/null 2>&1"%(kernel_out,pos_train,neg_train, train_out)
-	
-	classify_input = addon_string + ".classify_input.fa"
-	combine_pos_neg_command = "cat %s %s > %s"%(pos_test,neg_test,classify_input)
-	classify_command = "gkmsvm_classify -d %s %s %s_svseq.fa %s_svalpha.out %s >/dev/null 2>&1"%(d,classify_input,train_out,train_out,classify_out)
-	## run
-	os.system(kernel_command)
 	os.system(train_command)
 	os.system(combine_pos_neg_command)
 	os.system(classify_command)
