@@ -4,7 +4,7 @@
 
 `python feature_extraction.py`
 
-This will output `ML_data.csv`, which contains motif-footprint features, DeepSEA, CADD, and DNA sequences (for gkm-SVM).
+This will output `ML_data.csv`, which contains motif-footprint features, DeepSEA, CADD, and DNA sequences (for LS-GKM).
 
 `python main_classification.py`
 
@@ -26,7 +26,7 @@ These motif footprint scores were used to train a random forest model.
 
 For DeepSEA and CADD scores, no training process was used. auROC and auPRC were calculated for each cross-validation fold.
 
-For gkm-SVM, the extracted DNA sequences were the features that were directly inputs to `gkm_svm_train`.
+For LS-GKM, the extracted DNA sequences were the features that were directly inputs to `gkmtrain`.
 
 
 
