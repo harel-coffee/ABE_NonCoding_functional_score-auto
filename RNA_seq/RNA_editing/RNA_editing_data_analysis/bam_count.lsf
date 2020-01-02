@@ -1,0 +1,17 @@
+
+=cut bamCount 1 
+
+inputFile=input
+
+ncore=1
+mem=4000
+
+module load bam-readcount/0.8.0
+
+ref="/home/yli11/Data/Human/hg19/fasta/Homo_sapiens.add_chr.GRCh37.dna.primary_assembly.reordered.fa"
+
+bam-readcount -f $ref ${COL1} -w 1 > {{jid}}/${COL2}.bam.count
+
+module load python/2.7.13
+
+python parse_count.py {{jid}}/${COL2}.bam.count > {{jid}}/${COL2}.bam.count.AF99
