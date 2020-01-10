@@ -1,0 +1,12 @@
+
+
+=cut bw 1
+
+inputFile=input
+
+ncore=1
+mem=2000
+
+module load python/2.7.13 ucsc/041619
+
+bw_over_bed.py --extend ${COL1} -o ${COL2}

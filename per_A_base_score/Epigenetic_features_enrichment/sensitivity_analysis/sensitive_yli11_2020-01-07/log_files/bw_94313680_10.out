@@ -1,0 +1,73 @@
+Sender: LSF System <lsfadmin@nodecn029>
+Subject: Job 94313680[10]: <bw[1-11]> in cluster <hpcf_research_cluster> Done
+
+Job <bw[1-11]> was submitted from host <nodecn233> by user <yli11> in cluster <hpcf_research_cluster> at Tue Jan  7 10:37:24 2020.
+Job was executed on host(s) <nodecn029>, in queue <standard>, as user <yli11> in cluster <hpcf_research_cluster> at Tue Jan  7 10:37:26 2020.
+</home/yli11> was used as the home directory.
+</home/yli11/Projects/Li_gRNA/ABE_NonCoding_functional_score/per_A_base_score/Epigenetic_features_enrichment/sensitivity_analysis> was used as the working directory.
+Started at Tue Jan  7 10:37:26 2020.
+Terminated at Tue Jan  7 10:37:40 2020.
+Results reported at Tue Jan  7 10:37:40 2020.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+
+
+#BSUB -P sensitive_yli11_2020-01-07
+#BSUB -o sensitive_yli11_2020-01-07/log_files/bw_%J_%I.out -e sensitive_yli11_2020-01-07/log_files/bw_%J_%I.err
+#BSUB -n 1
+#BSUB -q standard
+#BSUB -R "span[hosts=1] rusage[mem=2000]"
+#BSUB -J "bw[1-11]"
+
+
+
+module purge
+
+id=$LSB_JOBINDEX
+COL1=`head -n $id input.list|tail -n1|awk -F "	" '{print $1}'`
+COL2=`head -n $id input.list|tail -n1|awk -F "	" '{print $2}'`
+COL3=`head -n $id input.list|tail -n1|awk -F "	" '{print $3}'`
+COL4=`head -n $id input.list|tail -n1|awk -F "	" '{print $4}'`
+COL5=`head -n $id input.list|tail -n1|awk -F "	" '{print $5}'`
+COL6=`head -n $id input.list|tail -n1|awk -F "	" '{print $6}'`
+COL7=`head -n $id input.list|tail -n1|awk -F "	" '{print $7}'`
+COL8=`head -n $id input.list|tail -n1|awk -F "	" '{print $8}'`
+COL9=`head -n $id input.list|tail -n1|awk -F "	" '{print $9}'`
+LINE=`head -n $id input.list|tail -n1`
+
+ncore=1
+mem=2000
+module load python/2.7.13 ucsc/041619
+bw_over_bed.py --extend ${COL1} -o ${COL2}
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   5.24 sec.
+    Max Memory :                                 45 MB
+    Average Memory :                             29.33 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1955.00 MB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                24
+    Run time :                                   13 sec.
+    Turnaround time :                            16 sec.
+
+The output (if any) follows:
+
+Processing bed file: neg.bed.bed4.2dcc4646ebe9
+Processing bed file: pos.bed.bed4.3944b5b35bd9
+
+
+PS:
+
+Read file <sensitive_yli11_2020-01-07/log_files/bw_94313680_10.err> for stderr output of this job.
+

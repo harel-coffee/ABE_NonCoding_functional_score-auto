@@ -226,7 +226,8 @@ def get_roi(myList):
 	
 def get_high_low_data(input,pos_cutoff,neg_cutoff):
 	df = pd.read_csv(input,index_col=0)
-	pos = df[df['HbFBase']>=pos_cutoff].index.tolist()
+	# pos = df[df['HbFBase']>=pos_cutoff].index.tolist()
+	pos = df[df['HbFBase']>pos_cutoff].index.tolist()
 	neg = df[df['HbFBase']<=neg_cutoff].index.tolist()
 	print ("Pos size %s. Neg size %s"%(len(pos),len(neg)))
 	return df.loc[pos+neg],pos,neg   
@@ -243,7 +244,8 @@ def roi2fasta(roi,genome_fa,flank):
 
 ## Define parameters
 
-high_hbf = 50
+# high_hbf = 50
+high_hbf = 0
 low_hbf = 0
 input = "Editable_A_scores.combined.scores.csv"
 flank = 100
@@ -343,7 +345,8 @@ adjusted_scores = pd.DataFrame(adjusted_scores)
 adjusted_scores.columns = set_col_names(motifs,top_n,"motif_footprint_score")
 adjusted_scores.index = high+low
 df = pd.concat([adjusted_scores,data],axis=1)
-df.to_csv("ML_data.csv")
+# df.to_csv("ML_data.csv")
+df.to_csv("all_A_features.csv")
 
 
 
