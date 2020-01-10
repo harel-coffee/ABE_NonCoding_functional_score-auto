@@ -1,6 +1,7 @@
 import pandas as pd
 import glob
-for i in ['pos','neg']:
+# for i in ['pos','neg']:
+for i in ['editable_A']:
 	df1 = pd.read_csv(glob.glob("%s*BW.csv"%(i))[0],index_col=0)
 	df2 = pd.read_csv(glob.glob("%s*degree.csv"%(i))[0],index_col=0)
 	print (df1.head())
