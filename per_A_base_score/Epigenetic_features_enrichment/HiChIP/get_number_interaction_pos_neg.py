@@ -12,7 +12,8 @@ def read_bedpe(f):
 	df[1] = df[1].astype(int)
 	df[2] = df[2].astype(int)	
 	df[4] = df[4].astype(int)
-	df[5] = df[5].astype(int)	
+	df[5] = df[5].astype(int)
+	df[df.columns[-1]] = df[df[df.columns[-1]]<=0.05]	
 	df = df.dropna()
 	return df
 	
