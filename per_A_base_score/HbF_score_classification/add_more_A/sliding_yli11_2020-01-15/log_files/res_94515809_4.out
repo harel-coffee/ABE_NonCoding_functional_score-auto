@@ -1,0 +1,101 @@
+Sender: LSF System <lsfadmin@nodecn202>
+Subject: Job 94515809[4]: <res[1-5]> in cluster <hpcf_research_cluster> Done
+
+Job <res[1-5]> was submitted from host <nodecn017> by user <yli11> in cluster <hpcf_research_cluster> at Wed Jan 15 16:48:37 2020.
+Job was executed on host(s) <nodecn202>, in queue <standard>, as user <yli11> in cluster <hpcf_research_cluster> at Wed Jan 15 16:48:38 2020.
+</home/yli11> was used as the home directory.
+</home/yli11/Projects/Li_gRNA/ABE_NonCoding_functional_score/per_A_base_score/HbF_score_classification/add_more_A> was used as the working directory.
+Started at Wed Jan 15 16:48:38 2020.
+Terminated at Wed Jan 15 17:10:41 2020.
+Results reported at Wed Jan 15 17:10:41 2020.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+
+
+#BSUB -P sliding_yli11_2020-01-15
+#BSUB -o sliding_yli11_2020-01-15/log_files/res_%J_%I.out -e sliding_yli11_2020-01-15/log_files/res_%J_%I.err
+#BSUB -n 1
+#BSUB -q standard
+#BSUB -R "span[hosts=1] rusage[mem=16000]"
+#BSUB -J "res[1-5]"
+
+
+
+module purge
+
+id=$LSB_JOBINDEX
+COL1=`head -n $id input.list|tail -n1|awk -F "	" '{print $1}'`
+COL2=`head -n $id input.list|tail -n1|awk -F "	" '{print $2}'`
+COL3=`head -n $id input.list|tail -n1|awk -F "	" '{print $3}'`
+COL4=`head -n $id input.list|tail -n1|awk -F "	" '{print $4}'`
+COL5=`head -n $id input.list|tail -n1|awk -F "	" '{print $5}'`
+COL6=`head -n $id input.list|tail -n1|awk -F "	" '{print $6}'`
+COL7=`head -n $id input.list|tail -n1|awk -F "	" '{print $7}'`
+COL8=`head -n $id input.list|tail -n1|awk -F "	" '{print $8}'`
+COL9=`head -n $id input.list|tail -n1|awk -F "	" '{print $9}'`
+LINE=`head -n $id input.list|tail -n1`
+
+ncore=1
+mem=16000
+module load conda3
+source activate py2
+python main_classification.py ${COL1}
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   8944.48 sec.
+    Max Memory :                                 4842 MB
+    Average Memory :                             3326.80 MB
+    Total Requested Memory :                     16000.00 MB
+    Delta Memory :                               11158.00 MB
+    Max Swap :                                   -
+    Max Processes :                              119
+    Max Threads :                                828
+    Run time :                                   1323 sec.
+    Turnaround time :                            1324 sec.
+
+The output (if any) follows:
+
+distance 100
+Negative Size: (9268,)
+Positive Size: (313,)
+After removing positive A neighbors
+Negative Size: (4138,)
+Positive Size: (313,)
+0
+count    4138.000000
+mean        2.272985
+std         2.154987
+min        -0.000000
+25%         0.389556
+50%         1.805451
+75%         3.529492
+max         9.977535
+Name: HbFBase, dtype: float64
+1
+count    313.000000
+mean      89.007431
+std       75.973132
+min       30.166657
+25%       39.841887
+50%       55.674643
+75%      113.903460
+max      305.465869
+Name: HbFBase, dtype: float64
+all features size: (4451, 116)
+epi features size: (4451, 16)
+TFBS features size: (4451, 100)
+
+
+PS:
+
+Read file <sliding_yli11_2020-01-15/log_files/res_94515809_4.err> for stderr output of this job.
+

@@ -1,0 +1,19 @@
+
+
+=cut res 1
+
+inputFile=input
+
+ncore=1
+mem=16000
+
+module load conda3
+
+source activate py2
+
+python main_classification.py ${COL1}
+
+
+
+
+
