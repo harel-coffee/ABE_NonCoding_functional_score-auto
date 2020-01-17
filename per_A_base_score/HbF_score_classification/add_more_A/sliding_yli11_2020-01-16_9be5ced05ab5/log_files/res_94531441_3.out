@@ -1,0 +1,72 @@
+Sender: LSF System <lsfadmin@nodecn026>
+Subject: Job 94531441[3]: <res[1-5]> in cluster <hpcf_research_cluster> Exited
+
+Job <res[1-5]> was submitted from host <nodecn204> by user <yli11> in cluster <hpcf_research_cluster> at Thu Jan 16 16:31:31 2020.
+Job was executed on host(s) <nodecn026>, in queue <standard>, as user <yli11> in cluster <hpcf_research_cluster> at Thu Jan 16 16:31:33 2020.
+</home/yli11> was used as the home directory.
+</home/yli11/Projects/Li_gRNA/ABE_NonCoding_functional_score/per_A_base_score/HbF_score_classification/add_more_A> was used as the working directory.
+Started at Thu Jan 16 16:31:33 2020.
+Terminated at Thu Jan 16 16:31:38 2020.
+Results reported at Thu Jan 16 16:31:38 2020.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+
+
+#BSUB -P sliding_yli11_2020-01-16_9be5ced05ab5
+#BSUB -o sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_%J_%I.out -e sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_%J_%I.err
+#BSUB -n 1
+#BSUB -q standard
+#BSUB -R "span[hosts=1] rusage[mem=16000]"
+#BSUB -J "res[1-5]"
+
+
+
+module purge
+
+id=$LSB_JOBINDEX
+COL1=`head -n $id input.list|tail -n1|awk -F "	" '{print $1}'`
+COL2=`head -n $id input.list|tail -n1|awk -F "	" '{print $2}'`
+COL3=`head -n $id input.list|tail -n1|awk -F "	" '{print $3}'`
+COL4=`head -n $id input.list|tail -n1|awk -F "	" '{print $4}'`
+COL5=`head -n $id input.list|tail -n1|awk -F "	" '{print $5}'`
+COL6=`head -n $id input.list|tail -n1|awk -F "	" '{print $6}'`
+COL7=`head -n $id input.list|tail -n1|awk -F "	" '{print $7}'`
+COL8=`head -n $id input.list|tail -n1|awk -F "	" '{print $8}'`
+COL9=`head -n $id input.list|tail -n1|awk -F "	" '{print $9}'`
+LINE=`head -n $id input.list|tail -n1`
+
+ncore=1
+mem=16000
+module load conda3
+source activate py2
+python main_classification.py ${COL1}
+
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   1.21 sec.
+    Max Memory :                                 10 MB
+    Average Memory :                             5.00 MB
+    Total Requested Memory :                     16000.00 MB
+    Delta Memory :                               15990.00 MB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                6
+    Run time :                                   4 sec.
+    Turnaround time :                            7 sec.
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_94531441_3.err> for stderr output of this job.
+

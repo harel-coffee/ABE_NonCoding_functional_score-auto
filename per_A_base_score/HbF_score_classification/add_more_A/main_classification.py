@@ -306,6 +306,7 @@ def plot_auROC_multi(df,color_dict,output):
 		# print (auc)
 		plot_df['x'] = x_predict
 		plot_df['y'] = y_predict
+		plot_df.to_csv("plot_df_auROC_%s_x_y_resolution_%s.csv"%(s,output),index=False)
 		sns.lineplot(data=plot_df,x="x",y="y",ci=0,label="%s AUC:%.2f"%(s,auc),color=color_dict[s])
 	plt.plot([0, 1], [0, 1], 'k--')
 	plt.xlim(0,1)
@@ -332,6 +333,7 @@ def plot_auPRC_multi(df,color_dict,output):
 		# print (auc)
 		plot_df['x'] = x_predict
 		plot_df['y'] = y_predict
+		plot_df.to_csv("plot_df_auPRC_%s_x_y_resolution_%s.csv"%(s,output),index=False)
 		sns.lineplot(data=plot_df,x="x",y="y",ci=0,label="%s AUC:%.2f"%(s,auc),color=color_dict[s])
 		# plt.step(x_predict, y_predict, where='post',label="%s AUC:%.2f"%(s,auc),color=color_dict[s])
 	# plt.plot([0, 1], [0, 1], 'k--')
@@ -519,7 +521,7 @@ for item in out_list:
 plot_df = pd.concat(df_list)
 plot_auROC_multi(plot_df,color_dict,distance)
 plot_auPRC_multi(plot_df,color_dict,distance)
-# plot_df.to_csv("plot_df.csv")
+plot_df.to_csv("plot_df_%s_100iter.csv"%(distance))
 pd.DataFrame(auROC_dict).to_csv("auROC_dict_%s_100iter.csv"%(distance),index=False)
 pd.DataFrame(auPRC_dict).to_csv("auPRC_dict_%s_100iter.csv"%(distance),index=False)
 # boxplot_paired_t_test(pd.DataFrame(auROC_dict),color_dict,"Area under ROC curve","auROC_boxplot")
