@@ -3,7 +3,7 @@
 #BSUB -P sliding_yli11_2020-01-16_9be5ced05ab5
 #BSUB -o sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_%J_%I.out -e sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_%J_%I.err
 #BSUB -n 1
-#BSUB -q standard
+#BSUB -q rhel7_priority
 #BSUB -R "span[hosts=1] rusage[mem=16000]"
 #BSUB -J "res[1-5]"
 

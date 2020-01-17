@@ -1,4 +1,4 @@
-
+#! /home/yli11/.conda/envs/py2/bin/python
 """
 use cross validation to plot mean ROC curve, show std
 
@@ -316,7 +316,8 @@ def plot_auROC_multi(df,color_dict,output):
 	plt.title('ROC curve')
 	plt.legend(loc='lower right',title="")
 	handles, labels = plt.gca().get_legend_handles_labels()
-	order = [5,4,3,2,0,1]
+	# order = [5,4,3,2,0,1]
+	order = [4,3,2,0,1]
 	plt.legend([handles[idx] for idx in order],[labels[idx] for idx in order])	
 
 	plt.savefig("%s_auROC.pdf"%(output), bbox_inches='tight')
@@ -414,7 +415,7 @@ color_dict['RF:TFBS']="#fa8911"
 color_dict['RF:Epi']="#fc42a5"
 color_dict['DeepSEA']="#213fff"
 color_dict['CADD']="#00bd3c"
-color_dict['LS-GKM']="#464d4f"
+# color_dict['LS-GKM']="#464d4f"
 
 auROC_dict={}
 auPRC_dict={}
@@ -485,7 +486,7 @@ X_dict['RF:TFBS']=X_TFBS
 X_dict['RF:Epi']=X_epi
 X_dict['DeepSEA']=X_DeepSEA
 X_dict['CADD']=X_CADD
-X_dict['LS-GKM']=X_gkm 
+# X_dict['LS-GKM']=X_gkm 
 
 
 ## RF top features
