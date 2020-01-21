@@ -1,0 +1,166 @@
+Sender: LSF System <lsfadmin@nodecn236>
+Subject: Job 95063416[4]: <res[1-5]> in cluster <hpcf_research_cluster> Done
+
+Job <res[1-5]> was submitted from host <nodecn208> by user <yli11> in cluster <hpcf_research_cluster> at Tue Jan 21 16:37:29 2020.
+Job was executed on host(s) <nodecn236>, in queue <rhel7_priority>, as user <yli11> in cluster <hpcf_research_cluster> at Tue Jan 21 16:37:40 2020.
+</home/yli11> was used as the home directory.
+</home/yli11/Projects/Li_gRNA/ABE_NonCoding_functional_score/per_A_base_score/HbF_score_classification/add_more_A> was used as the working directory.
+Started at Tue Jan 21 16:37:40 2020.
+Terminated at Tue Jan 21 16:45:04 2020.
+Results reported at Tue Jan 21 16:45:04 2020.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+
+
+#BSUB -P sliding_yli11_2020-01-16_9be5ced05ab5
+#BSUB -o sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_%J_%I.out -e sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_%J_%I.err
+#BSUB -n 1
+#BSUB -q rhel7_priority
+#BSUB -R "span[hosts=1] rusage[mem=16000]"
+#BSUB -J "res[1-5]"
+
+
+
+module purge
+
+id=$LSB_JOBINDEX
+COL1=`head -n $id input.list|tail -n1|awk -F "	" '{print $1}'`
+COL2=`head -n $id input.list|tail -n1|awk -F "	" '{print $2}'`
+COL3=`head -n $id input.list|tail -n1|awk -F "	" '{print $3}'`
+COL4=`head -n $id input.list|tail -n1|awk -F "	" '{print $4}'`
+COL5=`head -n $id input.list|tail -n1|awk -F "	" '{print $5}'`
+COL6=`head -n $id input.list|tail -n1|awk -F "	" '{print $6}'`
+COL7=`head -n $id input.list|tail -n1|awk -F "	" '{print $7}'`
+COL8=`head -n $id input.list|tail -n1|awk -F "	" '{print $8}'`
+COL9=`head -n $id input.list|tail -n1|awk -F "	" '{print $9}'`
+LINE=`head -n $id input.list|tail -n1`
+
+ncore=1
+mem=4000
+module load conda3
+source activate py2
+./main_classification3.py ${COL1}
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   3488.70 sec.
+    Max Memory :                                 4010 MB
+    Average Memory :                             3012.68 MB
+    Total Requested Memory :                     16000.00 MB
+    Delta Memory :                               11990.00 MB
+    Max Swap :                                   -
+    Max Processes :                              63
+    Max Threads :                                691
+    Run time :                                   443 sec.
+    Turnaround time :                            455 sec.
+
+The output (if any) follows:
+
+distance 100
+Negative Size: (9268,)
+Positive Size: (313,)
+After removing positive A neighbors
+Negative Size: (4138,)
+Positive Size: (313,)
+0
+count    4138.000000
+mean        2.272985
+std         2.154987
+min        -0.000000
+25%         0.389556
+50%         1.805451
+75%         3.529492
+max         9.977535
+Name: HbFBase, dtype: float64
+1
+count    313.000000
+mean      89.007431
+std       75.973132
+min       30.166657
+25%       39.841887
+50%       55.674643
+75%      113.903460
+max      305.465869
+Name: HbFBase, dtype: float64
+all features size: (4451, 116)
+epi features size: (4451, 16)
+TFBS features size: (4451, 100)
+RF:all 0.6344311142988337
+          x    y
+0       0.0  0.0
+77000   0.0  0.0
+348000  0.0  0.0
+78000   0.0  0.0
+79000   0.0  0.0
+RF:TFBS 0.6380137890763892
+          x    y
+0       0.0  0.0
+77000   0.0  0.0
+348000  0.0  0.0
+78000   0.0  0.0
+79000   0.0  0.0
+RF:Epi 0.5615578165963847
+          x    y
+0       0.0  0.0
+77000   0.0  0.0
+348000  0.0  0.0
+78000   0.0  0.0
+79000   0.0  0.0
+DeepSEA 0.525603400312427
+          x    y
+0       0.0  0.0
+77000   0.0  0.0
+348000  0.0  0.0
+78000   0.0  0.0
+79000   0.0  0.0
+CADD 0.5459110592823123
+          x    y
+0       0.0  0.0
+77000   0.0  0.0
+348000  0.0  0.0
+78000   0.0  0.0
+79000   0.0  0.0
+          x    y
+0  0.000000  1.0
+1  0.001001  1.0
+2  0.002002  1.0
+3  0.003003  1.0
+4  0.004004  1.0
+          x         y
+0  0.000000  1.000000
+1  0.001001  0.025776
+2  0.002002  0.051552
+3  0.003003  0.077327
+4  0.004004  0.103103
+          x    y
+0  0.000000  1.0
+1  0.001001  1.0
+2  0.002002  1.0
+3  0.003003  1.0
+4  0.004004  1.0
+          x    y
+0  0.000000  1.0
+1  0.001001  1.0
+2  0.002002  1.0
+3  0.003003  1.0
+4  0.004004  1.0
+          x    y
+0  0.000000  1.0
+1  0.001001  1.0
+2  0.002002  1.0
+3  0.003003  1.0
+4  0.004004  1.0
+
+
+PS:
+
+Read file <sliding_yli11_2020-01-16_9be5ced05ab5/log_files/res_95063416_4.err> for stderr output of this job.
+

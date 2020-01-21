@@ -24,8 +24,8 @@ COL9=`head -n $id input.list|tail -n1|awk -F "	" '{print $9}'`
 LINE=`head -n $id input.list|tail -n1`
 
 ncore=1
-mem=16000
+mem=4000
 module load conda3
 source activate py2
-./main_classification.py ${COL1}
+./main_classification3.py ${COL1}
 
