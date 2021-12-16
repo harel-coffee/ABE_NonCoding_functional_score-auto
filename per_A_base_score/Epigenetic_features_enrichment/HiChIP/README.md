@@ -20,3 +20,5 @@ python get_number_interaction_pos_neg.py input.bed
 ### Output
 
 output file is named as {input_name}_degree.csv
+
+the second last column is the number of loops overlapped with your query.
